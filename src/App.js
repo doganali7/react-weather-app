@@ -1,24 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
+import Info from "./components/Info";
+import Form from "./components/Form";
+import Weather from "./components/Weather";
+
+const API_KEY = "5074ec189c637bcee3766de4820faede";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h1>example</h1>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Info />
+      <Form />
+      <Weather />
     </div>
   );
 }
