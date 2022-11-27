@@ -1,17 +1,13 @@
 import "./App.css";
 import React from "react";
-import Info from "./components/Info";
-import Form from "./components/Form";
-import Weather from "./components/Weather";
+import SearchMain from "./components/SearchMain";
 
-const API_KEY = "5074ec189c637bcee3766de4820faede";
+// const API_KEY = "81ec38ab676d391f03a112c69905c8e5";
 
 function App() {
   return (
     <div className="App">
-      <Info />
-      <Form />
-      <Weather />
+      <SearchMain />
     </div>
   );
 }
