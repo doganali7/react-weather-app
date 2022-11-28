@@ -4,12 +4,29 @@ import WeatherDetails from "./WeatherDetails";
 
 export default function SearchMain() {
   const [searchTerm, setSearchTerm] = useState("Nicosia");
+  const [tempInfo, settempInfo] = useState({});
   const getWeatherInfo = async () => {
     try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=5074ec189c637bcee3766de4820faede`;
+      // https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&units=metric&appid=5074ec189c637bcee3766de4820faede`;
       let res = await fetch(url);
       let data = await res.json();
-      console.log(data);
+      const { temp, pressure, humidity } = data.main;
+      const { main: weatherType } = data.weather[0];
+      const { name } = data;
+      const { speed } = data.wind;
+      const { country, sunset } = data.sys;
+      const myNewWeatherInfo = {
+        temp,
+        pressure,
+        humidity,
+        weatherType,
+        name,
+        speed,
+        country,
+        sunset,
+      };
+      settempInfo(myNewWeatherInfo);
     } catch (error) {
       console.log(error);
     }
@@ -18,7 +35,6 @@ export default function SearchMain() {
     getWeatherInfo();
   }, []);
 
-  // https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
   return (
     <>
       <div className="wrap">
@@ -35,7 +51,7 @@ export default function SearchMain() {
           Search
         </button>
       </div>
-      <WeatherDetails />
+      <WeatherDetails {...tempInfo} />
     </>
   );
 }

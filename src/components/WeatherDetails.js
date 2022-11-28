@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function WeatherDetails() {
+export default function WeatherDetails({
+  temp,
+  pressure,
+  humidity,
+  weatherType,
+  name,
+  speed,
+  country,
+  sunset,
+}) {
+  // const [weatherState, setweatherState] = useState("");
+  let second = sunset;
+  let date = new Date(second * 1000);
+  let timeStr = `${date.getHours()}:${date.getMinutes()}`;
   return (
     <>
       <article className="widget">
@@ -9,11 +22,13 @@ export default function WeatherDetails() {
         </div>
         <div className="weatherInfo">
           <div className="temperature">
-            <span>23.5&deg;</span>
+            <span>{temp}&deg;</span>
           </div>
           <div className="description">
-            <div className="weatherCondition">sunny</div>
-            <div className="place">Nicosia, CY</div>
+            <div className="weatherCondition">{weatherType}</div>
+            <div className="place">
+              {name}, {country}
+            </div>
           </div>
         </div>
         <div className="date">{new Date().toLocaleString()}</div>
@@ -24,7 +39,7 @@ export default function WeatherDetails() {
                 <i className={"wi wi-sunset"}></i>
               </p>
               <p className="extra-info-leftside">
-                6:30 PM <br />
+                {timeStr} PM <br />
                 Sunset
               </p>
             </div>
@@ -33,7 +48,7 @@ export default function WeatherDetails() {
                 <i className={"wi wi-humidity"}></i>
               </p>
               <p className="extra-info-leftside">
-                %60 <br />
+                %{humidity} <br />
                 Humidity
               </p>
             </div>
@@ -44,7 +59,7 @@ export default function WeatherDetails() {
                 <i className={"wi wi-rain"}></i>
               </p>
               <p className="extra-info-leftside">
-                22 <br />
+                {pressure} <br />
                 Pressure
               </p>
             </div>
@@ -53,7 +68,8 @@ export default function WeatherDetails() {
                 <i className={"wi wi-strong-wind"}></i>
               </p>
               <p className="extra-info-leftside">
-                10km/h <br />
+                {speed} kmh
+                <br />
                 Wind Speed
               </p>
             </div>
